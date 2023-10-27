@@ -31,12 +31,32 @@
       let nums = document.querySelector(".numbers");
       let ops = document.querySelector(".operands");
       let equation = [];
-      let position = equation.length
       let placeholder;
-      nums.addEventListener("onclick", (event) => {
-        equation.push(event.target.value)
-        if (equation[position-1])
-      })
+      nums.addEventListener("click", (event) => {
+        console.log("nums event listener");
+        let numButton = event.target.value;
+        equation.push(numButton);
+        equation.toString;
+        display.textContent = equation;
+      });
+      ops.addEventListener("click", (event) => {
+        console.log("ops event listener");
+        let opsButton = event.target.value;
+        let position = equation.length;
+        console.log(position);
+        console.log(typeof equation[position - 1]);
+        if (typeof equation[position - 1] === "number") {
+          console.log("true");
+          equation.push(opsButton);
+          equation.toString;
+          display.textContent = equation;
+        } else {
+          equation.pop[position - 1];
+          equation.push(opsButton);
+          equation.toString;
+          display.textContent = equation;
+        }
+      });
     </script>
   </body>
 </html>
