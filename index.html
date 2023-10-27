@@ -8,30 +8,35 @@
   <body>
     <div class="display"></div>
     <div class="numbers">
-      <button id="1">1</button>
-      <button id="2">2</button>
-      <button id="3">3</button>
-      <button id="4">4</button>
-      <button id="5">5</button>
-      <button id="6">6</button>
-      <button id="7">7</button>
-      <button id="8">8</button>
-      <button id="9">9</button>
-      <button id="0">0</button>
+      <button id="1" value="1">1</button>
+      <button id="2" value="2">2</button>
+      <button id="3" value="3">3</button>
+      <button id="4" value="4">4</button>
+      <button id="5" value="5">5</button>
+      <button id="6" value="6">6</button>
+      <button id="7" value="7">7</button>
+      <button id="8" value="8">8</button>
+      <button id="9" value="9">9</button>
+      <button id="0" value="0">0</button>
     </div>
     <div class="operands">
-      <button id="plus">+</button>
-      <button id="minus">-</button>
-      <button id="times">*</button>
-      <button id="divide">/</button>
-      <button id="equals">=</button>
+      <button id="plus" value="+">+</button>
+      <button id="minus" value="-">-</button>
+      <button id="times" value="*">*</button>
+      <button id="divide" value="/">/</button>
+      <button id="equals" value="=">=</button>
     </div>
     <script>
-      let display = document.querySelector(display);
-      let nums = document.querySelector(numbers);
-      let ops = document.querySelector(operands);
+      let display = document.querySelector(".display");
+      let nums = document.querySelector(".numbers");
+      let ops = document.querySelector(".operands");
       let equation = [];
+      let position = equation.length
       let placeholder;
+      nums.addEventListener("onclick", (event) => {
+        equation.push(event.target.value)
+        if (equation[position-1])
+      })
     </script>
   </body>
 </html>
