@@ -24,22 +24,27 @@
       <button id="minus" value="-">-</button>
       <button id="times" value="*">*</button>
       <button id="divide" value="/">/</button>
-      <button id="equals" value="=">=</button>
     </div>
+    <button id="equals" value="=">=</button>
     <script>
       let display = document.querySelector(".display");
       let nums = document.querySelector(".numbers");
       let ops = document.querySelector(".operands");
+      let answer = document.querySelector("#equals");
       let equation = [];
-      let numDisplay = equation;
+      let numDisplay;
       let placeholder;
+      let test;
+      let printer;
       nums.addEventListener("click", (event) => {
         console.log("nums event listener");
         let numButton = parseInt(event.target.value);
         equation.push(numButton);
         numDisplay = equation;
-        numDisplay.join("");
-        display.textContent = numDisplay;
+        test = JSON.stringify(numDisplay);
+        printer = test.replaceAll('"', "").replaceAll(",", "");
+        display.textContent = printer;
+        console.log(typeof test);
       });
       ops.addEventListener("click", (event) => {
         console.log("ops event listener");
@@ -56,9 +61,10 @@
           equation.push(opsButton);
         }
         numDisplay = equation;
-        numDisplay.join("");
-        console.log(typeof numDisplay);
-        display.textContent = numDisplay;
+        test = JSON.stringify(numDisplay);
+        printer = test.replaceAll('"', "").replaceAll(",", "");
+        display.textContent = printer;
+        console.log(typeof test);
       });
     </script>
   </body>
