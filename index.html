@@ -26,37 +26,44 @@
       <button id="divide" value="/">/</button>
     </div>
     <button id="equals" value="=">=</button>
+    <div class="answerDisplay"></div>
     <script>
       let display = document.querySelector(".display");
       let nums = document.querySelector(".numbers");
       let ops = document.querySelector(".operands");
       let answer = document.querySelector("#equals");
+      let answerDisplay = document.querySelector(".answerDisplay");
       let equation = [];
       let numDisplay;
       let placeholder;
+      let a;
+      let b;
       let test;
       let printer;
+      let calculation;
+      let answerString;
+      let compareOne;
+      let compareTwo;
       nums.addEventListener("click", (event) => {
-        console.log("nums event listener");
         let numButton = parseInt(event.target.value);
+        let position = equation.length;
+        if (typeof equation[position - 1] === "number") {
+          numButton = parseInt("" + equation[position - 1] + numButton);
+          equation.splice(position - 1, 1);
+        }
         equation.push(numButton);
         numDisplay = equation;
         test = JSON.stringify(numDisplay);
         printer = test.replaceAll('"', "").replaceAll(",", "");
         display.textContent = printer;
-        console.log(typeof test);
       });
       ops.addEventListener("click", (event) => {
         console.log("ops event listener");
         let opsButton = event.target.value;
         let position = equation.length;
-        console.log(position);
-        console.log(typeof equation[position - 1]);
         if (typeof equation[position - 1] === "number") {
-          console.log("true");
           equation.push(opsButton);
         } else {
-          console.log("false");
           equation.splice(position - 1, 1);
           equation.push(opsButton);
         }
@@ -64,7 +71,78 @@
         test = JSON.stringify(numDisplay);
         printer = test.replaceAll('"', "").replaceAll(",", "");
         display.textContent = printer;
-        console.log(typeof test);
+      });
+      answer.addEventListener("click", () => {
+        let position = equation.length;
+        console.log(equation.includes("*"));
+        if (typeof equation[position - 1] != "number") {
+          alert("syntax error");
+        } else {
+          console.log(position);
+          for (let i = 0; i < position; i++) {
+            console.log("Everywhere");
+            if (equation.includes("*") | equation.includes("/")) {
+              compareOne = equation.indexOf("*");
+              compareTwo = equation.indexOf("/");
+              if (compareOne == -1) {
+                compareOne = 1000;
+              }
+              if (compareTwo == -1) {
+                compareTwo = 1000;
+              }
+              console.log(equation.indexOf("/"));
+              if (compareOne < compareTwo) {
+                placeholder = equation.indexOf("*");
+                console.log("here");
+                console.log(placeholder);
+                a = equation[placeholder - 1];
+                b = equation[placeholder + 1];
+                calculation = a * b;
+                equation.splice(placeholder - 1, 3, calculation);
+              } else {
+                placeholder = equation.indexOf("/");
+                console.log("There");
+                console.log(placeholder);
+                a = equation[placeholder - 1];
+                b = equation[placeholder + 1];
+                calculation = a / b;
+                equation.splice(placeholder - 1, 3, calculation);
+              }
+            }
+            if (equation.includes("+") | equation.includes("-")) {
+              compareOne = equation.indexOf("+");
+              compareTwo = equation.indexOf("-");
+              if (compareOne == -1) {
+                compareOne = 1000;
+              }
+              if (compareTwo == -1) {
+                compareTwo = 1000;
+              }
+              console.log(equation.indexOf("-"));
+              if (compareOne < compareTwo) {
+                placeholder = equation.indexOf("+");
+                console.log("here");
+                console.log(placeholder);
+                a = equation[placeholder - 1];
+                b = equation[placeholder + 1];
+                calculation = a + b;
+                equation.splice(placeholder - 1, 3, calculation);
+              } else {
+                placeholder = equation.indexOf("-");
+                console.log("There");
+                console.log(placeholder);
+                a = equation[placeholder - 1];
+                b = equation[placeholder + 1];
+                calculation = a - b;
+                equation.splice(placeholder - 1, 3, calculation);
+              }
+            }
+          }
+        }
+        answerString = JSON.stringify(equation);
+        equation = [];
+        display.textContent = equation;
+        answerDisplay.textContent = answerString;
       });
     </script>
   </body>
